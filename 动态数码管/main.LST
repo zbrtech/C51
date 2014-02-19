@@ -1,0 +1,74 @@
+C51 COMPILER V9.01   MAIN                                                                  02/18/2014 21:43:37 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <reg51.h>
+   2          
+   3          #define LED_PORT P0       //段选
+   4          #define SEL_PORT P1       //位选
+   5          
+   6          unsigned char code DIG_CODE[] = {0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,
+   7                                                                           0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71}; //显示0,1,2,3,4,5,6,7
+   8          unsigned char DIS_CODE[8];
+   9          unsigned char code DIG_SPACE[] = {0xfe,0xfd,0xfb,0xf7,0xef,0xdf,0xbf,0x7f};      //位选
+  10          
+  11          void Display();
+  12          void delay(unsigned char c);
+  13          int main()
+  14          {
+  15   1              unsigned char i;
+  16   1              for (i = 0; i < 8; ++i)
+  17   1                      DIS_CODE[i] = DIG_CODE[i];
+  18   1              while(1)
+  19   1              {
+  20   2                      Display();
+  21   2              }
+  22   1              return 0;
+  23   1      }
+  24          
+  25          void Display()
+  26          {
+  27   1              unsigned char i;
+  28   1              unsigned char j;
+  29   1              for (i = 0; i < 8; ++i)
+  30   1              {
+  31   2                      SEL_PORT = DIG_SPACE[i];   //共阴极位选
+  32   2                      LED_PORT = DIS_CODE[2];    //发送数据
+  33   2                      //j = 10;
+  34   2                      //while(--j);
+  35   2                      delay(10);
+  36   2      
+  37   2                      LED_PORT = 0x00; //消隐
+  38   2              }
+  39   1      }
+*** WARNING C280 IN LINE 28 OF MAIN.C: 'j': unreferenced local variable
+  40          
+  41          void delay(unsigned char c)
+  42          {
+  43   1              unsigned char a, b;
+  44   1              for (; c > 0; --c)
+  45   1                      for (a = 38; a > 0; ++a)
+  46   1                              for (b = 130; b > 0; ++b);
+  47   1                              
+  48   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     77    ----
+   CONSTANT SIZE    =     24    ----
+   XDATA SIZE       =   ----    ----
+C51 COMPILER V9.01   MAIN                                                                  02/18/2014 21:43:37 PAGE 2   
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

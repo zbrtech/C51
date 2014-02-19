@@ -1,0 +1,95 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/18/2014  10:41:24  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\KEIL\C51\BIN\BL51.EXE digNUmber.obj TO DigNumber
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  digNUmber.obj (DIGNUMBER)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  DigNumber (DIGNUMBER)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         _DATA_GROUP_
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0028H     UNIT         ?PR?_DELAYMS?DIGNUMBER
+            CODE    002BH     0028H     UNIT         ?PR?MAIN?DIGNUMBER
+            CODE    0053H     000CH     UNIT         ?C_C51STARTUP
+            CODE    005FH     000AH     UNIT         ?CO?DIGNUMBER
+
+
+
+OVERLAY MAP OF MODULE:   DigNumber (DIGNUMBER)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?DIGNUMBER
+
+?PR?MAIN?DIGNUMBER             0008H    0002H
+  +--> ?CO?DIGNUMBER
+  +--> ?PR?_DELAYMS?DIGNUMBER
+
+
+
+SYMBOL TABLE OF MODULE:  DigNumber (DIGNUMBER)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        DIGNUMBER
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  C:002BH         PUBLIC        main
+  C:005FH         PUBLIC        DIG_CODE
+  C:0003H         PUBLIC        _delayMs
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/18/2014  10:41:24  PAGE 2
+
+
+  -------         PROC          _DELAYMS
+  D:0006H         SYMBOL        n
+  -------         DO            
+  D:0004H         SYMBOL        a
+  D:0002H         SYMBOL        b
+  -------         ENDDO         
+  C:0003H         LINE#         7
+  C:0003H         LINE#         8
+  C:0003H         LINE#         10
+  C:0007H         LINE#         11
+  C:000BH         LINE#         12
+  C:002AH         LINE#         13
+  -------         ENDPROC       _DELAYMS
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        i
+  -------         ENDDO         
+  C:002BH         LINE#         14
+  C:002BH         LINE#         15
+  C:002BH         LINE#         17
+  C:002BH         LINE#         18
+  C:002BH         LINE#         19
+  C:0030H         LINE#         20
+  C:0030H         LINE#         21
+  C:0039H         LINE#         22
+  C:0040H         LINE#         23
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        DIGNUMBER
+
+Program Size: data=11.0 xdata=0 code=105
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

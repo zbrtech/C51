@@ -1,0 +1,101 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/17/2014  20:31:13  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\KEIL\C51\BIN\BL51.EXE main.obj TO FireLed
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  FireLed (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     002BH     UNIT         ?PR?_DELAY10MS?MAIN
+            CODE    002EH     0017H     UNIT         ?PR?MAIN?MAIN
+            CODE    0045H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   FireLed (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?_DELAY10MS?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  FireLed (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  C:0003H         PUBLIC        _Delay10Ms
+  D:00B8H         PUBLIC        IP
+  C:002EH         PUBLIC        main
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/17/2014  20:31:13  PAGE 2
+
+
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAY10MS
+  D:0006H         SYMBOL        i
+  -------         DO            
+  D:0004H         SYMBOL        a
+  D:0002H         SYMBOL        b
+  -------         ENDDO         
+  C:0003H         LINE#         8
+  C:0003H         LINE#         9
+  C:0003H         LINE#         11
+  C:000CH         LINE#         12
+  C:0010H         LINE#         13
+  C:002DH         LINE#         14
+  -------         ENDPROC       _DELAY10MS
+  -------         PROC          MAIN
+  -------         DO            
+  D:0001H         SYMBOL        led
+  -------         ENDDO         
+  C:002EH         LINE#         16
+  C:002EH         LINE#         17
+  C:002EH         LINE#         20
+  C:0030H         LINE#         22
+  C:0030H         LINE#         23
+  C:0030H         LINE#         24
+  C:0032H         LINE#         25
+  C:0039H         LINE#         26
+  C:003DH         LINE#         27
+  C:0041H         LINE#         28
+  C:0043H         LINE#         29
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+Program Size: data=9.0 xdata=0 code=81
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
