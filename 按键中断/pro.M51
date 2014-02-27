@@ -1,0 +1,120 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/23/2014  15:16:25  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\KEIL\C51\BIN\BL51.EXE main.obj TO pro
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  pro (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0001H     UNIT         ?DT?MAIN
+            IDATA   0009H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0092H     003CH     UNIT         ?PR?INTERRUPT_0?MAIN
+            CODE    00CEH     000AH     UNIT         ?CO?MAIN
+            CODE    00D8H     0008H     UNIT         ?PR?MAIN?MAIN
+            CODE    00E0H     0007H     UNIT         ?PR?INTERRUPT_INIT?MAIN
+            CODE    00E7H     0007H     UNIT         ?PR?_DELAY?MAIN
+            CODE    00EEH     0004H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   pro (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?INTERRUPT_0?MAIN
+  +--> ?PR?_DELAY?MAIN
+  +--> ?CO?MAIN
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN
+  +--> ?PR?INTERRUPT_INIT?MAIN
+
+
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/23/2014  15:16:25  PAGE 2
+
+
+SYMBOL TABLE OF MODULE:  pro (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  C:0092H         PUBLIC        interrupt_0
+  B:00A8H.7       PUBLIC        EA
+  C:00E0H         PUBLIC        interrupt_init
+  C:00E7H         PUBLIC        _delay
+  B:00B0H.2       PUBLIC        INT0
+  C:00CEH         PUBLIC        dig_number
+  C:00D8H         PUBLIC        main
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  D:0008H         PUBLIC        num
+  -------         PROC          INTERRUPT_INIT
+  C:00E0H         LINE#         12
+  C:00E0H         LINE#         13
+  C:00E0H         LINE#         14
+  C:00E2H         LINE#         15
+  C:00E4H         LINE#         16
+  C:00E6H         LINE#         17
+  -------         ENDPROC       INTERRUPT_INIT
+  -------         PROC          _DELAY
+  D:0007H         SYMBOL        n
+  C:00E7H         LINE#         19
+  C:00E7H         LINE#         20
+  C:00E7H         LINE#         21
+  C:00EDH         LINE#         22
+  -------         ENDPROC       _DELAY
+  -------         PROC          MAIN
+  C:00D8H         LINE#         24
+  C:00D8H         LINE#         25
+  C:00D8H         LINE#         26
+  C:00DBH         LINE#         27
+  C:00DEH         LINE#         28
+  -------         ENDPROC       MAIN
+  -------         PROC          INTERRUPT_0
+  C:0092H         LINE#         32
+  C:00A1H         LINE#         34
+  C:00A6H         LINE#         35
+  C:00A9H         LINE#         36
+  C:00A9H         LINE#         37
+  C:00ABH         LINE#         38
+  C:00B5H         LINE#         39
+  C:00BEH         LINE#         40
+  C:00C1H         LINE#         41
+  C:00C1H         LINE#         42
+  -------         ENDPROC       INTERRUPT_0
+  -------         ENDMOD        MAIN
+
+Program Size: data=10.0 xdata=0 code=242
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

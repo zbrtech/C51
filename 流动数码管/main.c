@@ -1,0 +1,77 @@
+#include <reg51.h>
+#define LED_PORT P0
+sbit LSPA = P1^0;
+sbit LSPB = P1^1;
+sbit LSPC = P1^2;
+
+sbit BEEP = P3^7;
+typedef unsigned char uint8;
+typedef unsigned int uint16;
+
+uint8 code dig[10][8] = {
+							{0x20,0x00,0x00,0x00, 0x00,0x00,0x00,0x04},
+							{0x01,0x00,0x00,0x00, 0x00,0x00,0x00,0x08},
+							{0x00,0x01,0x00,0x00, 0x00,0x00,0x08,0x00},
+							{0x00,0x00,0x01,0x00, 0x00,0x08,0x00,0x00},
+							{0x00,0x00,0x00,0x01, 0x08,0x00,0x00,0x00},
+
+							{0x00,0x00,0x00,0x08, 0x01,0x00,0x00,0x00},
+							{0x00,0x00,0x08,0x00, 0x00,0x01,0x00,0x00},
+							{0x00,0x08,0x00,0x00, 0x00,0x00,0x01,0x00},
+							{0x08,0x00,0x00,0x00, 0x00,0x00,0x00,0x01},
+							{0x10,0x00,0x00,0x00, 0x00,0x00,0x00,0x02}
+						};
+
+void delayMs(uint8 c)   //Îó²î 0us
+{
+    uint16 i, j;
+	for (i = c; i > 0; i--)
+		for(j = 110;j > 0; j--);
+}
+
+void beep()	 //·äÃùÆ÷Ïì
+{
+	BEEP = 0;
+	delayMs(10);
+	BEEP = 1;
+	delayMs(10);
+}
+void fire(int i, int j)
+{
+		switch(i)
+		{
+			case 0 : LSPA = 0; LSPB = 0; LSPC = 0; break;
+			case 1 : LSPA = 1; LSPB = 0; LSPC = 0; break;
+			case 2 : LSPA = 0; LSPB = 1; LSPC = 0; break;
+			case 3 : LSPA = 1; LSPB = 1; LSPC = 0; break;
+			case 4 : LSPA = 0; LSPB = 0; LSPC = 1; break;
+			case 5 : LSPA = 1; LSPB = 0; LSPC = 1; break;
+			case 6 : LSPA = 0; LSPB = 1; LSPC = 1; break;
+			case 7 : LSPA = 1; LSPB = 1; LSPC = 1; break;
+		}
+		LED_PORT = dig[j][i];
+		delayMs(1);
+}
+
+int main()
+{
+	uint8 i, j, n;
+	LED_PORT = 0x00;
+	while(1)
+	{	
+		 for (j = 0; j < 10; ++j)
+		 {
+			n = 10;
+			while(n--)
+			{
+		 		for (i = 0; i < 8; ++i)
+				{
+					fire(i ,j);
+					LED_PORT = 0x00;
+				}
+			}
+			//beep();
+		 }
+	}
+	return 0;
+}

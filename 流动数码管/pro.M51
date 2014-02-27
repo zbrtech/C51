@@ -1,0 +1,150 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/23/2014  20:36:43  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\KEIL\C51\BIN\BL51.EXE main.obj TO pro
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  pro (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         _DATA_GROUP_
+            IDATA   000CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0087H     UNIT         ?PR?_FIRE?MAIN
+            CODE    008AH     0050H     UNIT         ?CO?MAIN
+            CODE    00DAH     0034H     UNIT         ?PR?MAIN?MAIN
+            CODE    010EH     0020H     UNIT         ?PR?_DELAYMS?MAIN
+            CODE    012EH     000EH     UNIT         ?PR?BEEP?MAIN
+            CODE    013CH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   pro (MAIN)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                  0008H    0002H
+  +--> ?PR?_FIRE?MAIN
+
+?PR?_FIRE?MAIN                 000AH    0002H
+  +--> ?CO?MAIN
+  +--> ?PR?_DELAYMS?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  pro (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/23/2014  20:36:43  PAGE 2
+
+
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  B:00B0H.7       PUBLIC        BEEP
+  C:012EH         PUBLIC        beep
+  C:00DAH         PUBLIC        main
+  C:0003H         PUBLIC        _fire
+  B:0090H.0       PUBLIC        LSPA
+  B:0090H.1       PUBLIC        LSPB
+  B:0090H.2       PUBLIC        LSPC
+  C:008AH         PUBLIC        dig
+  C:010EH         PUBLIC        _delayMs
+  -------         PROC          _DELAYMS
+  D:0007H         SYMBOL        c
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:010EH         LINE#         25
+  C:010EH         LINE#         26
+  C:010EH         LINE#         28
+  C:0119H         LINE#         29
+  C:012DH         LINE#         30
+  -------         ENDPROC       _DELAYMS
+  -------         PROC          BEEP
+  C:012EH         LINE#         32
+  C:012EH         LINE#         33
+  C:012EH         LINE#         34
+  C:0130H         LINE#         35
+  C:0135H         LINE#         36
+  C:0137H         LINE#         37
+  -------         ENDPROC       BEEP
+  -------         PROC          _FIRE
+  D:0002H         SYMBOL        i
+  D:000AH         SYMBOL        j
+  C:0003H         LINE#         39
+  C:000BH         LINE#         40
+  C:000BH         LINE#         41
+  C:0033H         LINE#         42
+  C:0033H         LINE#         43
+  C:0037H         LINE#         44
+  C:003FH         LINE#         45
+  C:0043H         LINE#         46
+  C:004BH         LINE#         47
+  C:004FH         LINE#         48
+  C:0057H         LINE#         49
+  C:005BH         LINE#         50
+  C:0061H         LINE#         51
+  C:0061H         LINE#         52
+  C:0085H         LINE#         53
+  -------         ENDPROC       _FIRE
+  -------         PROC          MAIN
+  -------         DO            
+  D:0001H         SYMBOL        i
+  D:0008H         SYMBOL        j
+  D:0009H         SYMBOL        n
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/23/2014  20:36:43  PAGE 3
+
+
+  -------         ENDDO         
+  C:00DAH         LINE#         56
+  C:00DAH         LINE#         57
+  C:00DAH         LINE#         59
+  C:00DDH         LINE#         60
+  C:00DDH         LINE#         61
+  C:00DDH         LINE#         62
+  C:00E0H         LINE#         63
+  C:00E0H         LINE#         64
+  C:00E3H         LINE#         65
+  C:00EAH         LINE#         66
+  C:00EAH         LINE#         67
+  C:00F2H         LINE#         68
+  C:00F2H         LINE#         69
+  C:00FDH         LINE#         70
+  C:0100H         LINE#         71
+  C:0103H         LINE#         72
+  C:0103H         LINE#         74
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?BEEP?MAIN
+
+Program Size: data=13.0 xdata=0 code=328
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,102 @@
+C51 COMPILER V9.01   MAIN                                                                  02/23/2014 20:36:43 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #define LED_PORT P0
+   3          sbit LSPA = P1^0;
+   4          sbit LSPB = P1^1;
+   5          sbit LSPC = P1^2;
+   6          
+   7          sbit BEEP = P3^7;
+   8          typedef unsigned char uint8;
+   9          typedef unsigned int uint16;
+  10          
+  11          uint8 code dig[10][8] = {
+  12                                                                  {0x20,0x00,0x00,0x00, 0x00,0x00,0x00,0x04},
+  13                                                                  {0x01,0x00,0x00,0x00, 0x00,0x00,0x00,0x08},
+  14                                                                  {0x00,0x01,0x00,0x00, 0x00,0x00,0x08,0x00},
+  15                                                                  {0x00,0x00,0x01,0x00, 0x00,0x08,0x00,0x00},
+  16                                                                  {0x00,0x00,0x00,0x01, 0x08,0x00,0x00,0x00},
+  17          
+  18                                                                  {0x00,0x00,0x00,0x08, 0x01,0x00,0x00,0x00},
+  19                                                                  {0x00,0x00,0x08,0x00, 0x00,0x01,0x00,0x00},
+  20                                                                  {0x00,0x08,0x00,0x00, 0x00,0x00,0x01,0x00},
+  21                                                                  {0x08,0x00,0x00,0x00, 0x00,0x00,0x00,0x01},
+  22                                                                  {0x10,0x00,0x00,0x00, 0x00,0x00,0x00,0x02}
+  23                                                          };
+  24          
+  25          void delayMs(uint8 c)   //Îó²î 0us
+  26          {
+  27   1          uint16 i, j;
+  28   1              for (i = c; i > 0; i--)
+  29   1                      for(j = 110;j > 0; j--);
+  30   1      }
+  31          
+  32          void beep()      //·äÃùÆ÷Ïì
+  33          {
+  34   1              BEEP = 0;
+  35   1              delayMs(10);
+  36   1              BEEP = 1;
+  37   1              delayMs(10);
+  38   1      }
+  39          void fire(int i, int j)
+  40          {
+  41   1                      switch(i)
+  42   1                      {
+  43   2                              case 0 : LSPA = 0; LSPB = 0; LSPC = 0; break;
+  44   2                              case 1 : LSPA = 1; LSPB = 0; LSPC = 0; break;
+  45   2                              case 2 : LSPA = 0; LSPB = 1; LSPC = 0; break;
+  46   2                              case 3 : LSPA = 1; LSPB = 1; LSPC = 0; break;
+  47   2                              case 4 : LSPA = 0; LSPB = 0; LSPC = 1; break;
+  48   2                              case 5 : LSPA = 1; LSPB = 0; LSPC = 1; break;
+  49   2                              case 6 : LSPA = 0; LSPB = 1; LSPC = 1; break;
+  50   2                              case 7 : LSPA = 1; LSPB = 1; LSPC = 1; break;
+  51   2                      }
+  52   1                      LED_PORT = dig[j][i];
+  53   1                      delayMs(1);
+  54   1      }
+  55          
+C51 COMPILER V9.01   MAIN                                                                  02/23/2014 20:36:43 PAGE 2   
+
+  56          int main()
+  57          {
+  58   1              uint8 i, j, n;
+  59   1              LED_PORT = 0x00;
+  60   1              while(1)
+  61   1              {       
+  62   2                       for (j = 0; j < 10; ++j)
+  63   2                       {
+  64   3                              n = 10;
+  65   3                              while(n--)
+  66   3                              {
+  67   4                                      for (i = 0; i < 8; ++i)
+  68   4                                      {
+  69   5                                              fire(i ,j);
+  70   5                                              LED_PORT = 0x00;
+  71   5                                      }
+  72   4                              }
+  73   3                              //beep();
+  74   3                       }
+  75   2              }
+  76   1              return 0;
+  77   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    233    ----
+   CONSTANT SIZE    =     80    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

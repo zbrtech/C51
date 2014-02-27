@@ -1,0 +1,119 @@
+C51 COMPILER V9.01   MAIN                                                                  02/24/2014 20:42:51 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          /*========================================================================
+   2          #   FileName: main.c
+   3          #     Author: luchu1993
+   4          #      Email: luchu1993@163.com
+   5          #   HomePage: http://www.luchu1993.com
+   6          # LastChange: 2014-02-24 19:35:02
+   7          ========================================================================*/
+   8          #include <reg51.h>
+   9          
+  10          
+  11          typedef unsigned char uint8;
+  12          typedef unsigned int uint16;
+  13          
+  14          #define KEY P2
+  15          #define LED_PORT P0
+  16          uint8 code table[17] = { 0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,
+  17                                                  0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71, 0x40};
+  18          uint16 code tab[] = {64026, 64106, 64256, 64396, 64526, 64586, 64686, 64776, 
+  19                                                   64816, 64896, 64966, 65026, 65066, 65116, 65156, 65176};
+  20          
+  21          sbit BEEP = P3^7;
+  22          uint8 disp_buf;
+  23          uint8 key;
+  24          
+  25          uint8 STH0;
+  26          uint8 STL0;
+  27          void delayMs(uint16 xms)
+  28          {                
+  29   1              uint16 i, j;
+  30   1              for (i = xms; i > 0; i--)
+  31   1                      for (j = 110; j > 0; j--);
+  32   1      }
+  33          
+  34          void MatrixKey()
+  35          {
+  36   1              KEY = 0xff;
+  37   1              KEY = 0x0f;
+  38   1      
+  39   1              if (KEY != 0x0f)
+  40   1              {
+  41   2                      delayMs(10);  //按键消抖
+  42   2                      if (KEY != 0x0f)
+  43   2                      {
+  44   3                              KEY = 0x0f;
+  45   3                              switch(KEY)
+  46   3                              {
+  47   4                                      case 0x07:      key =  0; break;
+  48   4                                      case 0x0b:      key =  1; break;
+  49   4                                      case 0x0d:      key =  2; break;
+  50   4                                      case 0x0e:      key =  3; break;
+  51   4                              }
+  52   3                              KEY = 0xf0;
+  53   3                              switch(KEY)
+  54   3                              {
+  55   4                                      case 0x70:      key +=  0; break;
+C51 COMPILER V9.01   MAIN                                                                  02/24/2014 20:42:51 PAGE 2   
+
+  56   4                                      case 0xb0:      key +=  4; break;
+  57   4                                      case 0xd0:      key +=  8; break;
+  58   4                                      case 0xe0:      key += 12; break;
+  59   4                              }
+  60   3      
+  61   3                              disp_buf = table[key];
+  62   3                              STH0 = tab[key]/256;
+  63   3                              STL0 = tab[key]%256;
+  64   3                              TR0 = 1; //开启定时器
+  65   3                              while(KEY != 0xf0); //等待按键松开
+  66   3                              TR0 = 0;  //关闭定时器
+  67   3                              BEEP = 1;
+  68   3                      }
+  69   2              }
+  70   1      }
+  71          
+  72          int main()
+  73          {
+  74   1              KEY = 0xff;
+  75   1              LED_PORT = 0xff;
+  76   1              TMOD = 0x01;
+  77   1              EA =1; ET0 =1;
+  78   1              disp_buf = 0x40;
+  79   1      
+  80   1              while(1)
+  81   1              {
+  82   2                      MatrixKey();
+  83   2                      LED_PORT = ~disp_buf;
+  84   2                      delayMs(2);
+  85   2              }
+  86   1              return 0;
+  87   1      }
+  88          
+  89          void timer0 (void) interrupt 1
+  90          {
+  91   1              TH0 = STH0;
+  92   1              TL0 = STL0;
+  93   1              BEEP = ~BEEP;
+  94   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    222    ----
+   CONSTANT SIZE    =     49    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

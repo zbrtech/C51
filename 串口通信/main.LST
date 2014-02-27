@@ -1,0 +1,55 @@
+C51 COMPILER V9.01   MAIN                                                                  02/20/2014 21:36:23 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <reg51.h>
+   2          
+   3          void usartConfig(void)
+   4          {
+   5   1                      SCON = 0x50; //REN=1允许接收数据； 工作方式1， 8位Uart方式
+   6   1                      PCON = 0x80; //波特率不加倍
+   7   1                      TMOD = 0x20; //T1工作在方式2（自动重装）
+   8   1                      TH1 = 0xf3;
+   9   1                      TL1 = 0xf3;
+  10   1                      ES = 1; //打开接受中断
+  11   1                      TR1 = 1;  //打开计数器
+  12   1                      EA = 1; //CPU中断使能
+  13   1      }
+  14          
+  15          void main()
+  16          {
+  17   1              while(1)
+  18   1              {       
+  19   2              }
+  20   1      }
+  21          
+  22          void T1_zd(void) interrupt 4   //串口中断
+  23          {
+  24   1              unsigned char receiveData;
+  25   1      
+  26   1              receiveData = SBUF;
+  27   1              RI = 0;
+  28   1              SBUF = receiveData;
+  29   1              while (!TI);
+  30   1              TI = 0;
+  31   1      
+  32   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     47    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

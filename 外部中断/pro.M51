@@ -1,0 +1,164 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/20/2014  19:46:41  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\KEIL\C51\BIN\BL51.EXE main.obj TO pro
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  E:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  pro (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0014H     UNIT         ?DT?MAIN
+            IDATA   001CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     000CH     UNIT         ?C_C51STARTUP
+                    0012H     0001H                  *** GAP ***
+            CODE    0013H     0003H     ABSOLUTE     
+            CODE    0016H     019EH     UNIT         ?PR?MAIN?MAIN
+            CODE    01B4H     0055H     UNIT         ?C?LIB_CODE
+            CODE    0209H     0011H     UNIT         ?PR?INT0_ZD?MAIN
+            CODE    021AH     0011H     UNIT         ?PR?INT1_ZD?MAIN
+            CODE    022BH     000EH     UNIT         ?PR?_DELAYMS?MAIN
+            CODE    0239H     000BH     UNIT         ?PR?SYSTEMINIT?MAIN
+            CODE    0244H     000BH     UNIT         ?CO?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   pro (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?SYSTEMINIT?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_DELAYMS?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  pro (MAIN)
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/20/2014  19:46:41  PAGE 2
+
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:00A0H.3       PUBLIC        LS138B
+  B:00A0H.4       PUBLIC        LS138C
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+  B:00A8H.7       PUBLIC        EA
+  C:0209H         PUBLIC        Int0_zd
+  C:021AH         PUBLIC        Int1_zd
+  C:0244H         PUBLIC        DIG_NUM
+  C:0016H         PUBLIC        main
+  D:0008H         PUBLIC        int0Num
+  D:000AH         PUBLIC        int1Num
+  C:0239H         PUBLIC        systemInit
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  B:00A8H.2       PUBLIC        EX1
+  B:0088H.2       PUBLIC        IT1
+  C:022BH         PUBLIC        _delayMs
+  D:000CH         PUBLIC        ledOut
+  B:00A0H.2       PUBLIC        LS138A
+  -------         PROC          SYSTEMINIT
+  C:0239H         LINE#         12
+  C:0239H         LINE#         13
+  C:023BH         LINE#         14
+  C:023DH         LINE#         16
+  C:023FH         LINE#         17
+  C:0241H         LINE#         18
+  C:0243H         LINE#         19
+  -------         ENDPROC       SYSTEMINIT
+  -------         PROC          _DELAYMS
+  D:0007H         SYMBOL        i
+  -------         DO            
+  D:0006H         SYMBOL        j
+  -------         ENDDO         
+  C:022BH         LINE#         21
+  C:022BH         LINE#         22
+  C:022BH         LINE#         24
+  C:0231H         LINE#         25
+  C:0238H         LINE#         26
+  -------         ENDPROC       _DELAYMS
+  -------         PROC          MAIN
+  -------         DO            
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:0016H         LINE#         28
+  C:0016H         LINE#         30
+  C:0019H         LINE#         31
+  C:0019H         LINE#         32
+  C:0042H         LINE#         33
+  C:006BH         LINE#         34
+  C:0094H         LINE#         35
+  C:00B0H         LINE#         37
+  C:00D9H         LINE#         38
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/20/2014  19:46:41  PAGE 3
+
+
+  C:0102H         LINE#         39
+  C:012BH         LINE#         40
+  C:0147H         LINE#         42
+  C:0149H         LINE#         43
+  C:0153H         LINE#         44
+  C:0178H         LINE#         45
+  C:0178H         LINE#         46
+  C:017CH         LINE#         47
+  C:0184H         LINE#         48
+  C:0188H         LINE#         49
+  C:0190H         LINE#         50
+  C:0194H         LINE#         51
+  C:019CH         LINE#         52
+  C:01A0H         LINE#         53
+  C:01A6H         LINE#         54
+  C:01A6H         LINE#         55
+  C:01ABH         LINE#         56
+  -------         ENDPROC       MAIN
+  -------         PROC          INT0_ZD
+  C:0209H         LINE#         61
+  C:020BH         LINE#         63
+  C:020DH         LINE#         64
+  C:0215H         LINE#         65
+  C:0217H         LINE#         66
+  -------         ENDPROC       INT0_ZD
+  -------         PROC          INT1_ZD
+  C:021AH         LINE#         68
+  C:021CH         LINE#         70
+  C:021EH         LINE#         71
+  C:0226H         LINE#         72
+  C:0228H         LINE#         73
+  -------         ENDPROC       INT1_ZD
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        ?C?UIDIV
+  C:01B4H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+Program Size: data=29.0 xdata=0 code=590
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,179 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        02/23/2014  21:02:42  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\KEIL\C51\BIN\BL51.EXE main.obj TO pro
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  pro (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?MAIN
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0007H     UNIT         ?C_INITSEG
+                    000AH     0001H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     008CH     UNIT         ?C_C51STARTUP
+            CODE    009AH     0039H     UNIT         ?PR?TIMER0?MAIN
+            CODE    00D3H     0027H     UNIT         ?PR?DISPLAY?MAIN
+            CODE    00FAH     0022H     UNIT         ?PR?_DELAYMS?MAIN
+            CODE    011CH     0010H     UNIT         ?PR?INITTIMER0?MAIN
+            CODE    012CH     000EH     UNIT         ?PR?BEEP?MAIN
+            CODE    013AH     000EH     UNIT         ?PR?MAIN?MAIN
+            CODE    0148H     000AH     UNIT         ?CO?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   pro (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?TIMER0?MAIN
+  +--> ?PR?BEEP?MAIN
+
+?PR?BEEP?MAIN
+  +--> ?PR?_DELAYMS?MAIN
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/23/2014  21:02:42  PAGE 2
+
+
+?PR?MAIN?MAIN
+  +--> ?PR?INITTIMER0?MAIN
+  +--> ?PR?DISPLAY?MAIN
+
+?PR?DISPLAY?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_DELAYMS?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  pro (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  B:00B0H.7       PUBLIC        BEEP
+  C:012CH         PUBLIC        beep
+  C:013AH         PUBLIC        main
+  D:0008H         PUBLIC        count
+  C:0148H         PUBLIC        dig
+  D:0089H         PUBLIC        TMOD
+  D:0009H         PUBLIC        time_count
+  B:00A8H.1       PUBLIC        ET0
+  C:011CH         PUBLIC        InitTimer0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  C:00FEH         PUBLIC        _delayMs
+  C:009AH         PUBLIC        timer0
+  B:0088H.4       PUBLIC        TR0
+  C:00D3H         PUBLIC        display
+  C:00FAH         SYMBOL        L?0020
+  -------         PROC          L?0019
+  -------         ENDPROC       L?0019
+  C:00FAH         SYMBOL        L?0020
+  -------         PROC          _DELAYMS
+  D:0006H         SYMBOL        nms
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:00FEH         LINE#         11
+  C:00FEH         LINE#         12
+  C:00FEH         LINE#         14
+  C:0107H         LINE#         15
+  C:011BH         LINE#         16
+  -------         ENDPROC       _DELAYMS
+  -------         PROC          DISPLAY
+  C:00D3H         LINE#         18
+  C:00D3H         LINE#         19
+  C:00D3H         LINE#         20
+  C:00DFH         LINE#         21
+BL51 BANKED LINKER/LOCATER V6.22                                                      02/23/2014  21:02:42  PAGE 3
+
+
+  C:00E2H         LINE#         22
+  C:00E5H         LINE#         24
+  C:00F0H         LINE#         25
+  C:00F3H         LINE#         26
+  C:00F6H         LINE#         28
+  C:00F9H         LINE#         29
+  -------         ENDPROC       DISPLAY
+  -------         PROC          INITTIMER0
+  C:011CH         LINE#         31
+  C:011CH         LINE#         32
+  C:011CH         LINE#         33
+  C:011FH         LINE#         34
+  C:0122H         LINE#         35
+  C:0125H         LINE#         36
+  C:0127H         LINE#         37
+  C:0129H         LINE#         38
+  C:012BH         LINE#         39
+  -------         ENDPROC       INITTIMER0
+  -------         PROC          BEEP
+  C:012CH         LINE#         41
+  C:012CH         LINE#         42
+  C:012CH         LINE#         43
+  C:012EH         LINE#         44
+  C:0131H         LINE#         45
+  C:0133H         LINE#         46
+  -------         ENDPROC       BEEP
+  -------         PROC          MAIN
+  C:013AH         LINE#         48
+  C:013AH         LINE#         49
+  C:013AH         LINE#         50
+  C:013DH         LINE#         51
+  C:0140H         LINE#         53
+  C:0143H         LINE#         55
+  C:0143H         LINE#         56
+  C:0143H         LINE#         57
+  C:0146H         LINE#         58
+  -------         ENDPROC       MAIN
+  -------         PROC          TIMER0
+  C:009AH         LINE#         62
+  C:00A9H         LINE#         64
+  C:00ACH         LINE#         65
+  C:00AFH         LINE#         66
+  C:00B1H         LINE#         67
+  C:00B6H         LINE#         68
+  C:00B6H         LINE#         69
+  C:00B9H         LINE#         70
+  C:00BCH         LINE#         71
+  C:00BEH         LINE#         72
+  C:00BEH         LINE#         74
+  C:00C6H         LINE#         75
+  -------         ENDPROC       TIMER0
+  -------         ENDMOD        MAIN
+
+Program Size: data=11.0 xdata=0 code=337
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

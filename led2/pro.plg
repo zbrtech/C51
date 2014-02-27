@@ -1,0 +1,29 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+E:\GitHub\C51\led2\pro.uvproj
+Project File Date:  02/23/2014
+
+<h2>Output:</h2>
+Build target '目标 1'
+compiling main.c...
+MAIN.C(11): error C129: missing ';' before 'code'
+目标未创建
+Build target '目标 1'
+compiling main.c...
+MAIN.C(13): error C141: syntax error near 'n', expected ')'
+MAIN.C(15): error C202: 'n': undefined identifier
+目标未创建
+Build target '目标 1'
+compiling main.c...
+linking...
+Program Size: data=9.0 xdata=0 code=135
+"pro" - 0 Error(s), 0 Warning(s).
+Build target '目标 1'
+compiling main.c...
+linking...
+Program Size: data=9.0 xdata=0 code=135
+creating hex file from "pro"...
+"pro" - 0 Error(s), 0 Warning(s).

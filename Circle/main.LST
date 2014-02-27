@@ -1,0 +1,51 @@
+C51 COMPILER V9.01   MAIN                                                                  02/23/2014 14:22:41 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <reg51.h>
+   2          
+   3          typedef unsigned char uint8;
+   4          typedef unsigned int uint16;
+   5          
+   6          #define LED_PORT P0
+   7          
+   8          uint8 code dig_number[] = {0x01,0x02,0x04,0x08,0x10,0x20,0x40};
+   9          
+  10          void delay(uint16 n)
+  11          {
+  12   1              while(n--);
+  13   1      }
+  14          
+  15          int main()
+  16          {
+  17   1              uint8 i = 0;
+  18   1              while (1)
+  19   1              {
+  20   2                      for (i = 0; i < 6; ++i)
+  21   2                      {
+  22   3                              LED_PORT = ~dig_number[i];
+  23   3                              delay(20000);
+  24   3                      }
+  25   2                                                               
+  26   2              }
+  27   1              return 0;
+  28   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     34    ----
+   CONSTANT SIZE    =      7    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
