@@ -1,0 +1,152 @@
+C51 COMPILER V9.01   LCD                                                                   03/05/2014 16:26:55 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE LCD
+OBJECT MODULE PLACED IN lcd.OBJ
+COMPILER INVOKED BY: E:\Keil\C51\BIN\C51.EXE lcd.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include"lcd.h"
+   2          void lcd1602_delayMs(uint16 c)   //误差 0us
+   3          {
+   4   1          uint8 a,b;
+   5   1              for (; c>0; c--)
+   6   1              {
+   7   2                       for (b=199;b>0;b--)
+   8   2                       {
+   9   3                              for(a=1;a>0;a--);
+  10   3                       }      
+  11   2              }
+  12   1              
+  13   1      }
+  14          
+  15          /*******************************************************************************
+  16          * 函 数 名         : lcd1602_wcmd
+  17          * 函数功能                 : 向LCD写入一个字节的命令
+  18          * 输    入         : com
+  19          * 输    出         : 无
+  20          *******************************************************************************/
+  21          #ifndef         LCD1602_4PINS    //当没有定义这个LCD1602_4PINS时
+              void lcd1602_wcmd(uint8 com)      //写入命令
+              {
+                      LCD1602_EN = 0;     //使能
+                      LCD1602_RS = 0;    //选择发送命令
+                      LCD1602_RW = 0;    //选择写入
+                      
+                      lcd1602_port = com;     //放入命令
+                      lcd1602_delayMs(1);             //等待数据稳定
+              
+                      lcd1602_EN = 1;           //写入时序
+                      Lcd1602_delayMs(5);       //保持时间
+                      lcd1602_EN = 0;
+              }
+              #else 
+  36          void lcd1602_wcmd(uint8 com)      //写入命令
+  37          {
+  38   1              LCD1602_EN = 0;  //使能清零
+  39   1              LCD1602_RS = 0;  //选择写入命令
+  40   1              LCD1602_RW = 0;  //选择写入
+  41   1      
+  42   1              lcd1602_port = com;     //由于4位的接线是接到P0口的高四位，所以传送高四位不用改
+  43   1              lcd1602_delayMs(1);
+  44   1      
+  45   1              LCD1602_EN = 1;  //写入时序
+  46   1              lcd1602_delayMs(5);
+  47   1              LCD1602_EN = 0;
+  48   1      
+  49   1      //      Lcd1602_Delay1ms(1);
+  50   1              lcd1602_port = com << 4; //发送低四位
+  51   1              lcd1602_delayMs(1);
+  52   1      
+  53   1              LCD1602_EN = 1;  //写入时序
+  54   1              lcd1602_delayMs(5);
+  55   1              LCD1602_EN = 0;
+C51 COMPILER V9.01   LCD                                                                   03/05/2014 16:26:55 PAGE 2   
+
+  56   1      }
+  57          #endif
+  58          /*******************************************************************************
+  59          * 函 数 名         : LcdWriteData
+  60          * 函数功能                 : 向LCD写入一个字节的数据
+  61          * 输    入         : dat
+  62          * 输    出         : 无
+  63          *******************************************************************************/                   
+  64          #ifndef         LCD1602_4PINS              
+              void lcd1602_wdata(uint8 dat)                   //写入数据
+              {
+                      LCD1602_EN = 0; //使能清零
+                      LCD1602_RS = 1; //选择输入数据
+                      LCD1602_RW = 0; //选择写入
+              
+                      lcd1602_port = dat; //写入数据
+                      lcd1602_delayMs(1);
+              
+                      LCD1602_EN = 1;   //写入时序
+                      lcd1602_delayMs(5);   //保持时间
+                      LCD1602_EN = 0;
+              }
+              #else
+  79          void lcd1602_wdata(uint8 dat)                   //写入数据
+  80          {
+  81   1              LCD1602_EN = 0;   //使能清零
+  82   1              LCD1602_RS = 1;   //选择写入数据
+  83   1              LCD1602_RW = 0;   //选择写入
+  84   1      
+  85   1              lcd1602_port = dat;     //由于4位的接线是接到P0口的高四位，所以传送高四位不用改
+  86   1              lcd1602_delayMs(1);
+  87   1      
+  88   1              LCD1602_EN = 1;   //写入时序
+  89   1              lcd1602_delayMs(5);
+  90   1              LCD1602_EN = 0;
+  91   1      
+  92   1              lcd1602_port = dat << 4; //写入低四位
+  93   1              lcd1602_delayMs(1);
+  94   1      
+  95   1              LCD1602_EN = 1;   //写入时序
+  96   1              lcd1602_delayMs(5);
+  97   1              LCD1602_EN = 0;
+  98   1      }
+  99          #endif
+ 100          /*******************************************************************************
+ 101          * 函 数 名       : lcd1602_init()
+ 102          * 函数功能               : 初始化LCD屏
+ 103          * 输    入       : 无
+ 104          * 输    出       : 无
+ 105          *******************************************************************************/                   
+ 106          #ifndef         LCD1602_4PINS
+              void lcd1602_init()                                               //LCD初始化子程序
+              {
+                      lcd1602_wcmd(0x38);  //开显示
+                      lcd1602_wcmd(0x0c);  //开显示不显示光标
+                      lcd1602_wcmd(0x06);  //写一个指针加1
+                      lcd1602_wcmd(0x01);  //清屏
+                      lcd1602_wcmd(0x80);  //设置数据指针起点
+              }
+              #else
+ 116          void lcd1602_init()                                               //LCD初始化子程序
+ 117          {
+C51 COMPILER V9.01   LCD                                                                   03/05/2014 16:26:55 PAGE 3   
+
+ 118   1              lcd1602_wcmd(0x32);      //将8位总线转为4位总线
+ 119   1              lcd1602_wcmd(0x28);      //在四位线下的初始化
+ 120   1              lcd1602_wcmd(0x0c);  //开显示不显示光标
+ 121   1              lcd1602_wcmd(0x06);  //写一个指针加1
+ 122   1              lcd1602_wcmd(0x01);  //清屏
+ 123   1              lcd1602_wcmd(0x80);  //设置数据指针起点
+ 124   1      }
+ 125          #endif
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    120    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

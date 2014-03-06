@@ -1,0 +1,57 @@
+C51 COMPILER V9.01   MAIN                                                                  03/05/2014 16:26:55 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: E:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include "lcd.h"
+   3          
+   4          main()
+   5          {
+   6   1              uint8 code line1[] = {"    CSLG    "};
+   7   1              uint8 code line2[] = {"Hello Wrold!"};
+   8   1              uint8 i;
+   9   1      
+  10   1              lcd1602_init();
+  11   1              for(;;)
+  12   1              {
+  13   2                      i = 0;
+  14   2                      lcd1602_wcmd(0x10 | 0x80);
+  15   2                      while (line1[i] != '\0')
+  16   2                      {
+  17   3                              lcd1602_wdata(line1[i]);
+  18   3                              i++;
+  19   3                      }
+  20   2                      lcd1602_wcmd(0x50 | 0x80);
+  21   2                      i = 0;
+  22   2                      while (line2[i] != '\0')
+  23   2                      {
+  24   3                              lcd1602_wdata(line2[i]);
+  25   3                              i++;
+  26   3                      }
+  27   2              
+  28   2                      for (i = 0; i < 16; ++i)
+  29   2                      {
+  30   3                              lcd1602_wcmd(0x18);
+  31   3                              lcd1602_delayMs(500);
+  32   3                      }
+  33   2              }       
+  34   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     77    ----
+   CONSTANT SIZE    =     26    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

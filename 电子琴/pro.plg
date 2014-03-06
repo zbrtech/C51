@@ -7,9 +7,3 @@ E:\GitHub\C51\电子琴\pro.uvproj
 Project File Date:  02/24/2014
 
 <h2>Output:</h2>
-Build target '目标 1'
-compiling main.c...
-linking...
-Program Size: data=13.0 xdata=0 code=289
-creating hex file from "pro"...
-"pro" - 0 Error(s), 0 Warning(s).
